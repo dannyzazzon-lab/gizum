@@ -1,0 +1,5 @@
+credentials.md
+*.txt
+!robots.txt
+new_global_styles.json
+BG images/

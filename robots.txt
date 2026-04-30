@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dannyzazzon-lab.github.io/gizum/sitemap.xml
