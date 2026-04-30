@@ -36,34 +36,47 @@ if (lightbox) {
   const imgs = Array.from(document.querySelectorAll('[data-lightbox]'));
   let current = 0;
 
-  function openLightbox(index) {
-    current = (index + imgs.length) % imgs.length;
+  function openAt(index) {
+    current = ((index % imgs.length) + imgs.length) % imgs.length;
     lightboxImg.src = imgs[current].src;
     lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 
-  imgs.forEach((img, i) => {
-    img.addEventListener('click', () => openLightbox(i));
-  });
-
-  document.getElementById('lightbox-close').addEventListener('click', () => {
+  function closeLightbox() {
     lightbox.classList.remove('open');
-  });
+    document.body.style.overflow = '';
+  }
+
+  imgs.forEach((img, i) => img.addEventListener('click', () => openAt(i)));
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
 
   const prevBtn = document.getElementById('lightbox-prev');
   const nextBtn = document.getElementById('lightbox-next');
-  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(current - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(current + 1); });
 
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox || e.target === lightboxImg) lightbox.classList.remove('open');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openAt(current - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openAt(current + 1);
+    });
+  }
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
   });
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') lightbox.classList.remove('open');
-    if (e.key === 'ArrowLeft') openLightbox(current - 1);
-    if (e.key === 'ArrowRight') openLightbox(current + 1);
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') openAt(current - 1);
+    if (e.key === 'ArrowLeft') openAt(current + 1);
   });
 }
 
