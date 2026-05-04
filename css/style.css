@@ -291,7 +291,7 @@ section { padding: 80px 24px; }
 .contact-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .btn-whatsapp { background: #25D366; color: var(--white); }
 .btn-whatsapp:hover { background: #1da851; }
-.btn-phone { background: var(--white); color: var(--green-dark); }
+.btn-phone { background: var(--white); color: var(--green-dark); border: 2px solid var(--green-dark); }
 .btn-phone:hover { background: #f0f0f0; }
 
 /* ── FOOTER ── */
