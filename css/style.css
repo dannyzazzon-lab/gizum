@@ -2,6 +2,12 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.04); }
+}
+.hero-badge { animation: pulse-badge 1.4s ease-in-out infinite; }
+
 :root {
   --green: #2D5A27;
   --green-dark: #1e3d1a;
