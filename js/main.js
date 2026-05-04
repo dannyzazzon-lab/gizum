@@ -85,6 +85,14 @@ const form = document.getElementById('contact-form');
 if (form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    const text = `פנייה חדשה מהאתר 🌳\n\nשם: ${name}\nטלפון: ${phone}${city ? '\nעיר: ' + city : ''}${message ? '\nפרטים: ' + message : ''}`;
+    window.open('https://wa.me/972525522224?text=' + encodeURIComponent(text), '_blank');
+
     document.getElementById('form-success').style.display = 'block';
     form.reset();
   });
